@@ -1,7 +1,8 @@
 <?php
 $area=$titulo=$detalles="";
 ?>
-<h2>Nuevo</h2>
+<a href="index.php">Inicio</a>
+<h2>Nuevo pendiente</h2>
 <form action="database\pes_process.php" method="POST">
 <label for="">Area</label>
 <br>
@@ -15,5 +16,5 @@ $area=$titulo=$detalles="";
 <br>
 <textarea name="detalles" id="" cols="30" rows="10" values="<?php echo $detalles; ?>"></textarea>
 <br>
-<input type="submit" value="Guardar" name="pes_save">
+<input type="submit" value="Guardar" name="pes_registro">
 </form>

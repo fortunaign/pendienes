@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-09-2020 a las 04:44:01
+-- Tiempo de generación: 04-09-2020 a las 04:25:02
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.2
 
@@ -26,6 +26,9 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_coment` (IN `pes_id` INT(5), IN `pes_detalles` VARCHAR(50))  NO SQL
+INSERT INTO `pes_coment`(`pes_id`, `pes_coment`, `pes_fecha`) VALUES (pes_id,pes_detalles,(SELECT LOCALTIME))$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `add_registro` (IN `area` INT(2), IN `titulo` VARCHAR(30), IN `detalles` VARCHAR(50), IN `estado` INT(2), IN `activo` BOOLEAN)  INSERT INTO pes_registro 
 VALUES (NULL, area, titulo, detalles, (select LOCALTIME), estado, activo)$$
 
@@ -59,8 +62,17 @@ INSERT INTO `pes_areas` (`pes_id`, `pes_detalles`, `pes_activa`) VALUES
 CREATE TABLE `pes_coment` (
   `pes_id` int(5) NOT NULL,
   `pes_coment` varchar(50) NOT NULL,
-  `pes_fecha` datetime NOT NULL
+  `pes_fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pes_coment`
+--
+
+INSERT INTO `pes_coment` (`pes_id`, `pes_coment`, `pes_fecha`) VALUES
+(1, 'Ya se consulto con ADVANSYS y se explico en operac', '2020-09-03'),
+(2, 'Funciona.', '2020-09-03'),
+(2, 'Se agregan bien los comentarios.', '2020-09-03');
 
 -- --------------------------------------------------------
 
@@ -93,7 +105,7 @@ CREATE TABLE `pes_registro` (
   `pes_area` int(2) NOT NULL,
   `pes_titulo` varchar(30) NOT NULL,
   `pes_detalles` varchar(50) NOT NULL,
-  `pes_fecha` datetime NOT NULL,
+  `pes_fecha` date NOT NULL,
   `pes_estado` int(2) NOT NULL,
   `pes_activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -103,7 +115,10 @@ CREATE TABLE `pes_registro` (
 --
 
 INSERT INTO `pes_registro` (`pes_id`, `pes_area`, `pes_titulo`, `pes_detalles`, `pes_fecha`, `pes_estado`, `pes_activo`) VALUES
-(1, 1, 'Encaje legal', 'Explicar como se identifican los creditos con enca', '2020-09-02 22:33:53', 1, 1);
+(1, 1, 'Encaje legal', 'Explicar como se identifican los creditos con enca', '2020-09-02', 1, 1),
+(2, 1, 'Hola mundo', 'Prueba de procedimiento', '2020-09-03', 1, 0),
+(3, 1, 'Cambios en el manual', 'Hola mundo, prueba desde php.\r\nsaludos cordiales.', '2020-09-03', 1, 0),
+(4, 1, 'Requerimiento de advansys', 'Buscar correo donde eduardo solicita cambio en el ', '2020-09-03', 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -155,7 +170,7 @@ ALTER TABLE `pes_estado`
 -- AUTO_INCREMENT de la tabla `pes_registro`
 --
 ALTER TABLE `pes_registro`
-  MODIFY `pes_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pes_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
