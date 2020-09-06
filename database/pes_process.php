@@ -1,13 +1,5 @@
 <?php
-$servername="127.0.0.1";
-$username="root";
-$password="";
-$dbname="pendientes";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-if($conn->connect_error){
-    die("Connection failed: ". $conn->connect_error);
-}
+require 'conn.php';
 
 if(isset($_POST['pes_registro'])){
     $stmt=$conn->prepare("CALL add_registro(?,?,?,?,?)");
@@ -32,6 +24,28 @@ if(isset($_POST['pes_coment'])){
     $stmt->close();
     $conn->close();
     header('location:../pes_coment.php?id='.$id);
+}
+
+if(isset($_POST['add_details'])){
+    $sql="INSERT INTO pes_areas(pes_detalles) VALUES('".$_POST['details']."')";
+    if($conn->query($sql) === TRUE){
+        echo "Agregado";
+    }else{
+        echo "ERROR: ".$sql."<br>".$conn->error;
+    }
+    $conn->close();
+    header('location:../pes_input.php');
+}
+
+if(isset($_POST['pes_cerrar'])){
+    $sql="UPDATE pes_registro SET pes_activo=1 WHERE pes_id=".$_POST['pes_id'];
+    if($conn->query($sql) === TRUE){
+        echo "Agregado";
+    }else{
+        echo "ERROR: ".$sql."<br>".$conn->error;
+    }
+    $conn->close();
+    header('location:../index.php');
 }
 
 

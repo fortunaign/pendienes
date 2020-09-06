@@ -12,26 +12,19 @@
     <br>
     <table>
         <tr>
+            <td>Area</td>
             <td>Titulo</td>
-            <td>Fecha</td>
         </tr>
     <?php
-    $servername="127.0.0.1";
-    $username="root";
-    $password="";
-    $dbname="pendientes";
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if($conn->connect_error){
-        die("Connection failed: ". $conn->connect_error);
-    }
-    $sql="SELECT * FROM pes_registro";
+    require 'database\conn.php';
+    $sql="SELECT * FROM pes_general WHERE pes_activo=0";
     $result=$conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
     ?>
         <tr>
+            <td><?php echo $row['pes_detalles']; ?></td>
             <td><a href="pes_coment.php?id=<?php echo $row['pes_id'];?>"><?php echo $row['pes_titulo'];?></a></td>
-            <td><?php echo $row['pes_fecha'];?></td>
         </tr>
     <?php
         }
