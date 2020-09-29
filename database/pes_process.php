@@ -27,7 +27,7 @@ if(isset($_POST['pes_coment'])){
 }
 
 if(isset($_POST['add_details'])){
-    $sql="INSERT INTO pes_areas(pes_detalles) VALUES('".$_POST['details']."')";
+    $sql="INSERT INTO pes_areas(pes_area) VALUES('".$_POST['details']."')";
     if($conn->query($sql) === TRUE){
         echo "Agregado";
     }else{
