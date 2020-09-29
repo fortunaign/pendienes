@@ -24,33 +24,35 @@ if($result->num_rows > 0){
     }
 ?>
     <div class="col-sm-6">
-        <h4 class="my-3">Notas</h4>
-        <?php
-            $sql="SELECT * FROM pes_coment WHERE pes_id=".$_GET['id'];
-            $result=$conn->query($sql);
-            if($result->num_rows > 0){
-                while($row = $result->fetch_assoc()){
-            ?>
-            <p>
-                <?php echo $row['pes_coment']; ?>
-                <br>
-                <strong><?php echo $row['pes_fecha']; ?></strong>
-            </p>
-            <?php
-                }
-            }
-            $conn->close();
-        ?>
-    </div>
-    <div class="col-sm-4">
         <form action="database\pes_process.php" method="POST">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <h4 for="" class="my-3">Agregar Nota</h4>
             <div class="form-group">
-            <textarea name="comentario" id="" cols="30" rows="5" class="form-control"></textarea>
+            <textarea name="comentario" id="" cols="20" rows="5" class="form-control"></textarea>
             </div>
             <input type="submit" value="Guardar" name="pes_coment" class="btn btn-primary">
         </form>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <h4 class="my-3">Notas</h4>     
+            <?php
+                $sql="SELECT * FROM pes_coment WHERE pes_id=".$_GET['id'];
+                $result=$conn->query($sql);
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                ?>
+                <div class="col-12 alert alert-info">
+                    <?php echo $row['pes_coment']; ?>
+                    <br>
+                    <strong><?php echo $row['pes_fecha']; ?></strong>
+                </div>
+                <?php
+                    }
+                }
+                $conn->close();
+            ?>
+        </div>
     </div>
 </div>
 <?php require 'pes_footer.php'; ?>
