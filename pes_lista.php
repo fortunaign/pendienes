@@ -21,17 +21,14 @@
     <div class="col-12 col-md-4 col-lg-4">
         <p>
             <strong><?php echo $row['pes_titulo'];?></strong>
-            <br>
             <a href="pes_coment.php?id=<?php echo $row['pes_id'];?>">Leer mas..</a>
+            <br>
+            <span class="text-muted text-c"><?php echo $row['pes_fecha']." | ".$row['pes_hora'];?></span>
         </p>
     </div>
 
-    <div class="col-12 col-md-8 col-lg-8">
-        <p class="text-muted">
-            <?php echo $row['pes_fecha']." | ".$row['pes_hora'];?>
-            <br>
-            <?php echo $row['pes_area'];?>
-        </p>
+    <div class="col-sm-12 col-md-8 col-lg-8">
+        <p class="text-muted text-c"><?php echo $row['pes_area'];?></p>
     </div>
 
     <?php

@@ -32,11 +32,11 @@ $area=$titulo=$detalles="";
     
     <div class="form-group">
         <label for="">Titulo</label>
-        <input type="text" name="titulo" values="<?php echo $titulo; ?>" class="form-control">
+        <input type="text" name="titulo" values="<?php echo $titulo; ?>" class="form-control" required>
     </div>
     <div class="form-group">
         <label for="">Detalles</label>
-        <textarea name="detalles" id="" cols="30" rows="5" values="<?php echo $detalles; ?>" class="form-control"></textarea>
+        <textarea name="detalles" id="" cols="30" rows="5" values="<?php echo $detalles; ?>" class="form-control" required></textarea>
     </div>
     <input type="submit" value="Guardar" name="pes_registro" class="btn btn-primary">
     </form>    
